@@ -16,11 +16,5 @@ module.exports = {
       modifiers: 'cmd',
       key: 'o',
     }))
-    ... // other code
-    menubar.append(new global.gui.MenuItem({
-      label: 'File',
-      submenu: fileMenu,
-    }))
-    win.menu = menubar
   },
 }

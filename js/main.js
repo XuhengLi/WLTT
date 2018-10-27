@@ -1,4 +1,6 @@
 const editor = require('./editor.js')
+const menu = require('./menu.js')
+menu.initMenu()
 module.exports = {
   init() {
     $(() => {

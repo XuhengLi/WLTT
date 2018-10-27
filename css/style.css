@@ -31,3 +31,9 @@ body {
   padding: 0 10px;
   overflow-y: scroll;
 }
+#menu {
+  box-sizing: border-box;
+  flex: 1;
+  padding: 0 0px;
+  overflow-y: scroll;
+}
