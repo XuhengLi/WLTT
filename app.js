@@ -1,4 +1,5 @@
 const main = require('./js/main.js')
+//const menu = require('./js/menu.js')
 const gui = require('nw.gui')
 const win = gui.Window.get()
 win.showDevTools()
@@ -23,3 +24,4 @@ for (var i = 0; i < menu.items.length; ++i) {
 }
 
 main.init()
+//menu.initMenu()

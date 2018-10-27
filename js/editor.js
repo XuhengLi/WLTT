@@ -1,5 +1,6 @@
 const marked = require('marked')
 const $ = global.$
+const hljs = global.hljs
 module.exports = {
   reload() {
     marked.setOptions({
