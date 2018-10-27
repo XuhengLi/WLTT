@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>WLTT Editor</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+  <div id='body'>
+    <textarea id='editor'></textarea>
+    <div id='preview'></div>
+  </div>
+  <input style='display: none;' id='openFile' type='file' />
+  <script>
+    global.gui = require('nw.gui') // nw.js的gui界面
+    global.window = window
+    global.$ = $
+  </script>
+</body>
+<script src='../app.js'></script>
+</html>

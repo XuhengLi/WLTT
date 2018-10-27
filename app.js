@@ -1,0 +1,5 @@
+const main = require('./js/main.js')
+const gui = require('nw.gui')
+const win = gui.Window.get()
+win.showDevTools()
+main.init()

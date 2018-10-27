@@ -1,8 +1,22 @@
 {
+  "main": "index.html",
   "name": "md-note",
   "version": "0.0.1",
-  "main": "index.html",
+  "description": "a markdown app via nwjs",
+  "window": {
+    "title": "md-note",
+    "toolbar": true,
+    "frame": true,
+    "position": "center",
+    "width": 1000,
+    "height": 800
+  },
   "dependencies": {
+    "gulp-less": "^4.0.1",
+    "jquery": "^3.1.0",
+    "marked": "^0.3.6",
+    "qiniu": "^7.2.1",
+    "taboverride": "^4.0.3",
     "sqlite3": "^4.0.3"
   }
 }

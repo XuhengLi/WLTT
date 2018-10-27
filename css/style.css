@@ -1,0 +1,33 @@
+body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family:PingFang SC, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+}
+#body {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+#editor {
+  box-sizing: border-box;
+  flex: 1;
+  padding: 0 5px;
+  margin: 0;
+  line-height: 20px;
+  color: #F9F9F5;
+  background-color: #2d2d2d;
+  resize: none;
+  outline: none;
+  border: none;
+}
+#preview {
+  box-sizing: border-box;
+  flex: 1;
+  padding: 0 10px;
+  overflow-y: scroll;
+}
