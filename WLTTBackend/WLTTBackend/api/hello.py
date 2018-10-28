@@ -13,7 +13,7 @@ def hello_world_func():
     return flask.jsonify(dict), 206
 
 @WLTTBackend.app.route('/api/getnote/all/', methods=["GET"])
-def get_posts():
+def get_notes():
     context = {}
     connection = WLTTBackend.model.get_db()
     cur = connection.execute('''SELECT * FROM NOTES N;''')
@@ -21,3 +21,11 @@ def get_posts():
     context["notes"] = notes
     return flask.jsonify(**context)
 
+@WLTTBackend.app.route('/api/savenote/', methods=["POST"])
+def save_notes():
+    connection = WLTTBackend.model.get_db()
+    input_data = flask.request.form
+    database.execute('''INSERT INTO NOTES(notename, content) VALUES ("{}", "{}");'''.format(input_data['note_name'], input_data['note_content']))
+
+    context = {}
+    return flask.jsonify(context)
