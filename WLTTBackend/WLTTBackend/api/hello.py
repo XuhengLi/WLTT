@@ -25,13 +25,7 @@ def get_notes():
 def save_notes():
     connection = WLTTBackend.model.get_db()
     input_data = flask.request.form
-    cur = connection.execute('''SELECT * FROM NOTES N WHERE N.NOTENAME = "{}"'''.format(input_data[
-    	'note_name']))
-    row = cur.fetchone()
-    if row is not None:
-    	connection.execute('''UPDATE NOTES N SET CONTENT="{}" WHERE N.NOTENAME="{}"'''.format(input_data['note_content'], input_data['note_name']))
-    else:
-    	connection.execute('''INSERT INTO NOTES(notename, content) VALUES ("{}", "{}");'''.format(input_data['note_name'], input_data['note_content']))
+    database.execute('''INSERT INTO NOTES(notename, content) VALUES ("{}", "{}");'''.format(input_data['note_name'], input_data['note_content']))
 
     context = {}
     return flask.jsonify(context)
