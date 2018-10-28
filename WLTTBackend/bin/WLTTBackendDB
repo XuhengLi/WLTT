@@ -24,6 +24,8 @@ case $1 in
       echo "+ mkdir -p var/uploads"
       sqlite3 var/WLTTBackend.sqlite3 < sql/schema.sql
       echo "+ sqlite3 var/WLTTBackend.sqlite3 < sql/schema.sql"
+      sqlite3 var/WLTTBackend.sqlite3 < sql/data.sql
+      echo "+ sqlite3 var/WLTTBackend.sqlite3 < sql/data.sql"
       # cp sql/uploads/* var/uploads/
       # echo "+ cp sql/uploads/* var/uploads/"
     else
