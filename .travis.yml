@@ -5,4 +5,4 @@ python:
 install:
   - pip install -r dependencies.txt
 script:
-  pytest
+  pytest ./WLTTBackend/WLTTBackend/api/test.py
