@@ -5,16 +5,25 @@
   <title>WLTT Editor</title>
   <link rel="stylesheet" href="/css/style.css" />
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 
 <body>
   <div id='body'>
-    <div id='menu'></div>
-    <textarea id='editor'></textarea>
+    <ul id='note-item-list'></ul>
+
+    <div id='note-editor'>
+      <textarea id='title'></textarea>
+      <textarea id='editor'></textarea>
+    </div>
+    <div id='noteid' style='display:none'></div>
     <div id='preview'></div>
+    <button id='new'>New</button>
+    <button id='save'>Save</button>
+    <button id='delete'>Del</button>
   </div>
   <script>
-    global.gui = require('nw.gui') // nw.js的gui界面
+    global.gui = require('nw.gui')
     global.window = window
     global.$ = $
   </script>
