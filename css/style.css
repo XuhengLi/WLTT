@@ -8,14 +8,28 @@ body {
   font-size: 16px;
   line-height: 20px;
 }
+
 #body {
   display: flex;
   height: 100%;
   overflow: hidden;
 }
+
+#title {
+  box-sizing: border-box;
+  padding: 0 5px;
+  margin: 5px 0px;
+  line-height: 30px;
+  color: #F9F9F5;
+  background-color: #2d2d2d;
+  resize: none;
+  outline: none;
+  border: none;
+  height:40px;
+}
+
 #editor {
   box-sizing: border-box;
-  flex: 1;
   padding: 0 5px;
   margin: 0;
   line-height: 20px;
@@ -24,16 +38,32 @@ body {
   resize: none;
   outline: none;
   border: none;
+  height: 100%;
 }
+
 #preview {
   box-sizing: border-box;
   flex: 1;
   padding: 0 10px;
   overflow-y: scroll;
 }
+
 #menu {
   box-sizing: border-box;
   flex: 1;
   padding: 0 0px;
   overflow-y: scroll;
+}
+
+#note-editor {
+  display: flex;
+  flex:1;
+  box-sizing: border-box;
+  flex-direction: column;
+  width: 400px;
+}
+
+#note-item-list {
+  margin:10px;
+  width:100px;
 }

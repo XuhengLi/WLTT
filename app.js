@@ -1,10 +1,9 @@
 const main = require('./js/main.js')
 //const menu = require('./js/menu.js')
-const gui = require('nw.gui')
-const win = gui.Window.get()
-const db = require('./js/db.js')
-win.showDevTools()
+const dbservice = require('./js/db.js')
+const db = new dbservice()
 
-main.init()
 db.init()
+main.init()
+
 //menu.initMenu()

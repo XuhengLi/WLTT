@@ -15,7 +15,6 @@ module.exports = {
     const preview = $('#preview')
     const editorDom = $('#editor')
     const text = editorDom.val()
-    console.log(marked(text))
     preview.html(marked(text))
   }
 }
