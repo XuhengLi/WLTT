@@ -9,3 +9,8 @@ before_script:
   - npm install
 os:
   - macos
+sudo:
+  - required
+addons:
+  chrome:
+    -stable
