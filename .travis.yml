@@ -9,8 +9,6 @@ before_script:
   - npm install
 os:
   - macos
-sudo:
-  - required
-addons:
-  chrome:
-    - stable
+before_install:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
