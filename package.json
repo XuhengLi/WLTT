@@ -15,7 +15,6 @@
     "gulp-less": "^4.0.1",
     "jquery": "^3.1.0",
     "marked": "^0.3.6",
-    "qiniu": "^7.2.1",
     "sqlite": "^3.0.0",
     "sqlite3": "^4.0.3",
     "taboverride": "^4.0.3",

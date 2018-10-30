@@ -1,8 +1,6 @@
 language:
-  python
-python:
-  - "3.6"
-install:
-  - pip install -r dependencies.txt
-script:
-  pytest ./WLTTBackend/WLTTBackend/api/test.py
+  node_js
+node_js:
+  - node
+services:
+  - sqlite3
