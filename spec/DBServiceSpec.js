@@ -1,5 +1,5 @@
 describe('DBServiceSpec', function() {
-    var dbservice = require('./db.js')
+    var dbservice = require('./js/db.js')
 
     beforeEach(function() {
         db = new dbservice();
