@@ -1,8 +1,0 @@
-WLTTBackend/__init__.py
-WLTTBackend/config.py
-WLTTBackend/model.py
-WLTTBackend.egg-info/PKG-INFO
-WLTTBackend.egg-info/SOURCES.txt
-WLTTBackend.egg-info/dependency_links.txt
-WLTTBackend.egg-info/requires.txt
-WLTTBackend.egg-info/top_level.txt
