@@ -1,10 +1,11 @@
 language:
-  node_js
+  - node_js
 node_js:
   - node
 services:
   - sqlite3
 srcipt: node_modules/karma/bin/karma start my.conf.js --single-run
-
 before_script:
   - npm install
+os:
+  - macos
