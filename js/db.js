@@ -1,7 +1,8 @@
 class dbservice {
-    constructor() {
+    constructor(dbname='mydb') {
+        global.$ = require('jquery');
         var openDatabase = require('websql');
-        this.db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024)
+        this.db = openDatabase(dbname, '1.0', 'my first database', 2 * 1024 * 1024)
         this.table_name = 'note'
     }
 
