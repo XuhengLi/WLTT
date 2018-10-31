@@ -2,11 +2,18 @@ describe('DBServiceSpec', () => {
     var dbservice = require('../js/db.js')
 
     beforeEach(function() {
+        global.jQuery = require("jquery")
         db = new dbservice();
     });
 
-    it('should create a new note and unlock the editor', () => {
+    it('should create new note in the database', () => {
         expect(true).toBe(true)
+    })
+
+    it('when create new note, editor should be unlocked', () => {
+        db.new()
+        expect(document.getElementById('editor').disabled ||
+               document.getElementById('title').disabled).toBe(false)
     })
 
     it('should create a table of note if not exist', () => {
