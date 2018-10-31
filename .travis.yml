@@ -4,7 +4,7 @@ node_js:
   - node
 services:
   - sqlite3
-srcipt: node_modules/karma/bin/karma start my.conf.js --single-run
+srcipt: node_modules/karma/bin/karma start my.conf.js --single-run --watch=false
 before_script:
   - npm install
 os:
