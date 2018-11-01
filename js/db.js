@@ -72,7 +72,7 @@ class dbservice {
         this.db.transaction((tx) => {
             var sql = 'update '+ this.table_name +
                       ' set title = "' + title + '", content = "' + content + '"' +
-                      'where id="' + window.cur_noteid + '"'
+                      ' where id="' + window.cur_noteid + '"'
             console.log(sql);
             tx.executeSql(sql, [], function(tx, result) {
                 console.log('update success');

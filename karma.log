@@ -1,0 +1,128 @@
+[32m01 11 2018 12:52:31.854:INFO [framework.browserify]: [39mbundle built
+[32m01 11 2018 12:52:31.858:INFO [karma-server]: [39mKarma v3.1.1 server started at http://0.0.0.0:9876/
+[32m01 11 2018 12:52:31.858:INFO [launcher]: [39mLaunching browsers Chrome with concurrency unlimited
+[32m01 11 2018 12:52:31.862:INFO [launcher]: [39mStarting browser Chrome
+[32m01 11 2018 12:52:32.861:INFO [Chrome 70.0.3538 (Mac OS X 10.14.0)]: [39mConnected on socket r-ohAPRiQHDCdzl5AAAA with id 36603097
+[33m01 11 2018 12:52:32.873:WARN [middleware:karma]: [39mInvalid file type, defaulting to js. browserify
+Chrome 70.0.3538 (Mac OS X 10.14.0) ERROR: [36m'DEPRECATION:', 'Setting specFilter directly on Env is deprecated, please use the specFilter option in `configure`'[39m
+
+
+[1A[2KChrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'init db'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36mDatabase{}[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'create table if not exists testtable(id varchar(36) not NULL,title varchar(255) default NULL,content text default NULL,createtime datetime not NULL default(datetime()),modifytime datetime not NULL default(datetime()),primary key (id))'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'get_notes'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'success'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'insert into testtable(id, title) values ("86eaaca0-ddf6-11e8-8495-3dabdf0ba84f", "untitled")'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m1[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'select id,title from testtable where id="86eaaca0-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'<li class="note-entry" href="#" noteid="86eaaca0-ddf6-11e8-8495-3dabdf0ba84f">untitled</li>'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'afterEach'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 0 of 4[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KChrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'init db'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36mDatabase{}[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'get_notes'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'create table if not exists testtable(id varchar(36) not NULL,title varchar(255) default NULL,content text default NULL,createtime datetime not NULL default(datetime()),modifytime datetime not NULL default(datetime()),primary key (id))'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'success'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'insert into testtable(id, title) values ("86ee0800-ddf6-11e8-8495-3dabdf0ba84f", "untitled")'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m1[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'select id,title from testtable where id="86ee0800-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'<li class="note-entry" href="#" noteid="86ee0800-ddf6-11e8-8495-3dabdf0ba84f">untitled</li>'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'should create new note in the database'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KLOG: [36m'afterEach'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 1 of 4[32m SUCCESS[39m (0 secs / 0.05 secs)
+[1A[2KChrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'init db'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36mDatabase{}[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'get_notes'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'save'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36mDatabase{}[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'get_notes'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'create table if not exists testtable(id varchar(36) not NULL,title varchar(255) default NULL,content text default NULL,createtime datetime not NULL default(datetime()),modifytime datetime not NULL default(datetime()),primary key (id))'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'success'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'insert into testtable(id, title) values ("86f0a010-ddf6-11e8-8495-3dabdf0ba84f", "untitled")'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m1[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'select id,title from testtable where id="86f0a010-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'<li class="note-entry" href="#" noteid="86f0a010-ddf6-11e8-8495-3dabdf0ba84f">untitled</li>'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'update testtable set title = "oxbbei9i3q", content = "sjg7c2rp6no" where id="86f0a010-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'update success'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'select id,title from testtable where id="86f0a010-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KLOG: [36m'afterEach'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 2 of 4[32m SUCCESS[39m (0 secs / 0.07 secs)
+[1A[2KChrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'init db'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36mDatabase{}[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'create table if not exists testtable(id varchar(36) not NULL,title varchar(255) default NULL,content text default NULL,createtime datetime not NULL default(datetime()),modifytime datetime not NULL default(datetime()),primary key (id))'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'get_notes'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'save'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36mDatabase{}[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'get_notes'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'success'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'insert into testtable(id, title) values ("86f42280-ddf6-11e8-8495-3dabdf0ba84f", "untitled")'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m1[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'select id,title from testtable where id="86f42280-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'<li class="note-entry" href="#" noteid="86f42280-ddf6-11e8-8495-3dabdf0ba84f">untitled</li>'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'update testtable set title = "lkpu5gcw61b", content = "gp1xc5g91bd" where id="86f42280-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'update success'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'select id,title from testtable where id="86f42280-ddf6-11e8-8495-3dabdf0ba84f"'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m<li class="note-entry" href="#" noteid="86eaaca0-ddf6-11e8-8495-3dabdf0ba84f">untitled</li>[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2KLOG: [36m'afterEach'[39m
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 3 of 4[32m SUCCESS[39m (0 secs / 0.093 secs)
+[1A[2K[31mChrome 70.0.3538 (Mac OS X 10.14.0) DBServiceSpec when click save, should update the note list FAILED[39m
+	Expected 'untitled' to be 'lkpu5gcw61b'.
+	    at <Jasmine>
+	    at db.db.transaction (/var/folders/xb/3m42q4wd7774z453zjzzvmjr0000gn/T/552aafc927b13734065654dd47565450.browserify:12249:36)
+Chrome 70.0.3538 (Mac OS X 10.14.0): Executed 4 of 4[31m (1 FAILED)[39m (0 secs / 0.113 secs)
+[1A[2KChrome 70.0.3538 (Mac OS X 10.14.0): Executed 4 of 4[31m (1 FAILED)[39m (0.083 secs / 0.113 secs)
+[31mTOTAL: 1 FAILED, 3 SUCCESS[39m
