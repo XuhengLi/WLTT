@@ -1,9 +1,9 @@
 class dbservice {
-    constructor(dbname='mydb') {
+    constructor(dbname='mydb', table_name='note') {
         global.$ = require('jquery');
         var openDatabase = require('websql');
         this.db = openDatabase(dbname, '1.0', 'my first database', 2 * 1024 * 1024)
-        this.table_name = 'note'
+        this.table_name = table_name
     }
 
     init() {
@@ -18,7 +18,11 @@ class dbservice {
                       'modifytime datetime not NULL default(datetime()),' +
                       'primary key (id))'
             console.log(sql)
-            tx.executeSql(sql)
+            tx.executeSql(sql, [], (tx, result) => {
+                console.log('success')
+            }, (tx, error) => {
+                console.log('error')
+            })
         });
         console.log(this.db)
 

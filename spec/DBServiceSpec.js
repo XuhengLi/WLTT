@@ -1,7 +1,7 @@
 describe('DBServiceSpec', () => {
     var dbservice = require('../js/db.js')
-    beforeEach(function() {
-        db = new dbservice('testdb');
+    beforeAll(function() {
+        db = new dbservice('testdb', 'testtable');
         db.init()
         var editor_dom = document.createElement("textarea")
         var title_dom = document.createElement("textarea")
@@ -17,9 +17,12 @@ describe('DBServiceSpec', () => {
         element.appendChild(list_dom)
     });
 
-    afterEach(() => {
+    afterEach(function() {
         db.db.transaction((tx) => {
-            sql = 'drop table testdb'
+            console.log('afterEach')
+            // var sql = 'drop table testtable'
+            // tx.executeSql(sql, [], function (tx, results) {
+            // })
         })
     })
 
@@ -27,6 +30,7 @@ describe('DBServiceSpec', () => {
         db.new()
         db.db.transaction((tx) => {
             var sql = 'select * from ' + db.table_name
+            console.log('should create new note in the database')
             tx.executeSql(sql, [], function (tx, results) {
                 var len = results.rows.length, i;
                     expect(len).toBe(1)
@@ -60,7 +64,14 @@ describe('DBServiceSpec', () => {
     })
 
     it('when click save, should update the note list', () =>  {
-
+        db.new()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        db.save()
+        var li = document.getElementById('note-item-list')
+        expect(li).toBe(title)
 
     })
 
