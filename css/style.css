@@ -19,9 +19,6 @@ body {
   box-sizing: border-box;
   padding: 0 5px;
   margin: 5px 0px;
-  line-height: 30px;
-  color: #F9F9F5;
-  background-color: #2d2d2d;
   resize: none;
   outline: none;
   border: none;
@@ -60,10 +57,17 @@ body {
   flex:1;
   box-sizing: border-box;
   flex-direction: column;
-  width: 400px;
+  /*width: 400px;*/
 }
 
-#note-item-list {
-  margin:10px;
-  width:100px;
+.li{
+  font-size: 20px;
+}
+
+.bg-image-full {
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
 }
