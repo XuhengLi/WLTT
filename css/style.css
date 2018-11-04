@@ -15,6 +15,14 @@ body {
   overflow: hidden;
 }
 
+#header_div {
+  padding: 25px;
+  background: url('https://unsplash.it/1900/1080?image=1076');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 220px;
+}
+
 #title {
   box-sizing: border-box;
   padding: 0 5px;
