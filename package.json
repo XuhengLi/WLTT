@@ -8,8 +8,8 @@
     "toolbar": true,
     "frame": true,
     "position": "center",
-    "width": 1300,
-    "height": 870
+    "width": 1600,
+    "height": 1200
   },
   "dependencies": {
     "bootstrap": "4.1.3",

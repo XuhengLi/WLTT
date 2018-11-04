@@ -4,8 +4,11 @@
   <meta charset="utf-8" />
   <title>WLTT Editor</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/plugins.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="assets/fonts/iconsmind/iconsmind.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,38 +23,60 @@
       </div>
     </div>
   </div>
-  <hr>
   <div style="display: flex;height: 80%;">
-    <div class="col-md-2">
-      <input type="button" class="btn btn-primary" value="Create" id="new"/><br/>
+    <div class="col-md-2" style="background-color: #EAE6DA; border-right: solid black;">
+      <br>
+      <button class="btn btn-primary" id="new"><i class="fa fa-plus" aria-hidden="true"></i> Create</button><br/>
       <h4><b>All Available Notes: </b></h4>
       <ul class="sidebar-nav" style="margin-left: -20px" id='note-item-list'>
       </ul>
     </div>
-    <div class="col-md-10" style="display: flex;height: 90%;">
-      <div style="border-left:1px solid #000; width: 4px;"></div>
-      <div class="col-md-6">
-        <form>
+
+    <div class="col-md-10" style="display: flex;height: 100%;">
+
+      <div class="col-md-6" style="height: 90%;overflow: scroll;">
+        <br>
+        <form style="height: 90%;">
+
           <div class="form-group">
             <label for="noteTitle">Note Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Enter your note title">
+            <input type="text" class="form-control border" id="title" placeholder="Enter your note title">
           </div>
-          <div class="form-group">
+
+          <div class="form-group" style="height: 90%;">
             <label for="noteContent">Note Content</label><br>
-            <textarea type="text" id='editor' style="height: 500px;" class="scrollabletextbox md-textarea form-control" name="note">
+            <textarea type="text" id='editor' style="height: 100%;" class="scrollabletextbox md-textarea form-control" name="note">
             </textarea>
           </div>
-          <button type="button" id='save' class="btn btn-success">Save</button>
-          <button type="button" id='delete' class="btn btn-warning">Delete</button>
+
+          <br>
+          <button type="button" id='save' class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+          <button type="button" id='delete' class="btn btn-warning"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
         </form>
       </div>
-      <div style="border-left:1px solid #000; width: 4px"></div>
-      <div id='preview' class="col-md-6">
+
+      <div class="col-md-6" style="background-color: #F0EDE5" id='preview_div'>
+        
+        <div id='preview'></div>
       </div>
+
     </div>
+
     <div id='noteid' style='display:none'></div>
+
   </div>
 
+  <footer style="background-color: #efefef">
+    <div class="text-center center-block">
+      <br>
+      <span style="font-size: 17px;"><b style="font-style: italic;">We Are Junyue Wu(W), Xuheng Li(L), Shulan Tang(T), Bowen Tan(T).<b> Find Us On:</span><br>
+      <a href="https://www.facebook.com/"><i class="fa fa-facebook-square fa-3x social"></i></a>
+      <a href="https://twitter.com/"><i class="fa fa-twitter-square fa-3x social"></i></a>
+      <a href="https://plus.google.com/"><i class="fa fa-google-plus-square fa-3x social"></i></a>
+      <a href="#"><i class="fa fa-envelope-square fa-3x social"></i></a>
+      <br/><br/>
+    </div>
+  </footer>
   <script>
     global.gui = require('nw.gui')
     global.window = window
