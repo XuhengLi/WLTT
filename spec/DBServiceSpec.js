@@ -1,6 +1,6 @@
 describe('DBServiceSpec', () => {
     var dbservice = require('../js/db.js')
-
+    global.$ = require('jquery');
     beforeEach(function(done) {
         db = new dbservice('testdb', 'testtable');
         db.init()
@@ -54,24 +54,24 @@ describe('DBServiceSpec', () => {
         done()
     })
 
-    // it('when click save, should save the note to db', (done) =>  {
-    //     db.new()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     db.save()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db', (done) =>  {
+        db.new()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        db.save()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe(title)
+                expect(results.rows.item(0).content).toBe(content)
+                done()
+            })
+        })
+    })
 
     // it('should delete the note with and update the list', () =>  {
     //     expect(true).toBe(true)
