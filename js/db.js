@@ -1,5 +1,6 @@
 class dbservice {
     constructor() {
+        global.$ = require('jquery');
         this.db = openDatabase('mydb', '1.0', 'my first database', 2 * 1024 * 1024)
         this.table_name = 'note'
     }

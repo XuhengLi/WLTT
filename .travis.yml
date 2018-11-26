@@ -1,8 +1,18 @@
 language:
-  python
-python:
-  - "3.6"
-install:
-  - pip install -r dependencies.txt
-script:
-  pytest ./WLTTBackend/WLTTBackend/api/test.py
+  - node_js
+node_js:
+  - node
+services:
+  - sqlite3
+srcipt: node_modules/karma/bin/karma start my.conf.js --single-run --watch=false
+before_script:
+  - npm install
+os:
+  - macos
+before_install:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+
+sudo: required
+addons:
+  chrome: stable
