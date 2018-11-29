@@ -10,8 +10,7 @@ module.exports = {
     $('#upload').bind('click', () => {
         console.log("clicked")
         var id = $('#selected_note').val();
-        if(id !== "-1")
-        {
+        if(id !== "-1") {
             marked.setOptions({
               gfm: true,
               tables: true,
@@ -25,7 +24,6 @@ module.exports = {
             const editorDom = $('#editor')
             const text = editorDom.val()
             // preview.html(marked(text))
-
             // console.log(text)
             mkdirp('tmp', function(err) { 
                 if(err) {
@@ -33,25 +31,23 @@ module.exports = {
                 }
                 console.log("tmp folder created")
             });
-
             fs.writeFile("tmp/.tmp.md", text, function(err) {
                 if(err) {
                     return console.log(err);
                 }
                 console.log("The file was saved!");
-            }); 
-         
+            });
             markdownpdf().from("tmp/.tmp.md").to("tmp/tmp.pdf", function () {
               console.log("Done")
             })
-
             fs.unlink('tmp/.tmp.md', (err) => {
               if (err) throw err;
               console.log('temp file was deleted');
             });
+
+            
         }
-        else
-        {
+        else {
             alert("Please select a note first, then click upload button.")
         }
     });  
