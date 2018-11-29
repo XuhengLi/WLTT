@@ -15,6 +15,11 @@ module.exports = {
     const preview = $('#preview')
     const editorDom = $('#editor')
     const text = editorDom.val()
+    // preview.html(marked(text))
+    // console.log("preview marked text")
+    // console.log(marked(text))
+    // console.log("finish previewing")
     preview.html(marked(text))
+
   }
 }

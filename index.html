@@ -26,7 +26,8 @@
   <div style="display: flex;height: 80%;">
     <div class="col-md-2" style="background-color: #EAE6DA; border-right: dashed black;">
       <br>
-      <button class="btn btn-primary" id="new"><i class="fa fa-plus" aria-hidden="true"></i> Create</button><br/>
+      <button class="btn btn-primary" id="new"><i class="fa fa-plus" aria-hidden="true"></i><b> Create</b></button>
+      <button class="btn btn-info" id="upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i><b> Upload</b></button><br/>
       <h4><b>All Available Notes: </b></h4>
       <ul class="sidebar-nav" style="margin-left: -20px" id='note-item-list'>
       </ul>
@@ -63,7 +64,7 @@
     </div>
 
     <div id='noteid' style='display:none'></div>
-
+    <input type="hidden" value="-1" id="selected_note" />
   </div>
 
   <footer style="background-color: #efefef">

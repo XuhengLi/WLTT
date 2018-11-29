@@ -124,7 +124,7 @@ class dbservice {
             editorDom.val(res.content)
             titleDom.val(res.title)
             editor.reload()
-            console.log(res.content);
+            // console.log(res.content);
             editorDom.prop('disabled', false)
             titleDom.prop('disabled', false)
         }
@@ -137,6 +137,7 @@ class dbservice {
         console.log(li)
         $('#note-item-list').append(li)
         $('li[noteid="'+ id +'"]').bind('click', () => {
+            $('#selected_note').val(id)
             this.save()
             var condition = 'id="'+ id +'"'
             var fields = 'content,title'
