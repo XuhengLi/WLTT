@@ -50,6 +50,8 @@ class dbservice {
         })
         $('#editor').prop('disabled', false)
         $('#title').prop('disabled', false)
+        $('#delete').prop('disabled', false)
+        $('#save').prop('disabled', false)
         $('#editor').val('')
         $('#title').val('untitled')
         $('#preview').empty()
@@ -108,6 +110,8 @@ class dbservice {
                 $('#title').prop('disabled', true)
                 $('#title').val('')
                 $('#preview').empty()
+                $('#delete').prop('disabled', true)
+                $('#save').prop('disabled', true)
             }, function (tx, error) {
                 console.log(error)
             })
@@ -119,6 +123,8 @@ class dbservice {
         if (res) {
             const editorDom = $('#editor')
             const titleDom = $('#title')
+            const deleteBtnDom = $('#delete')
+            const saveBtnDom = $('#save')
             const editor = require('./editor.js')
             console.log(res)
             editorDom.val(res.content)
@@ -127,6 +133,8 @@ class dbservice {
             // console.log(res.content);
             editorDom.prop('disabled', false)
             titleDom.prop('disabled', false)
+            deleteBtnDom.prop('disabled', false)
+            saveBtnDom.prop('disabled', false)
         }
     }
 
