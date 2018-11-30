@@ -24,11 +24,16 @@ module.exports = function(config) {
     exclude: [
     ],
 
+    // coverageReporter = {
+    //     type : 'html',
+    //     dir : 'coverage/'
+    // },
+
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
         './spec/*.js': ['browserify'],
-        './js/*.js': ['browserify', 'coverage']
+        './js/*.js': ['browserify','coverage']
     },
 
     // test results reporter to use
@@ -64,11 +69,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity,
-
-    coverageReporter: {
-        type : 'html',
-        dir : 'coverage/'
-    }
+    concurrency: Infinity
   })
 }
