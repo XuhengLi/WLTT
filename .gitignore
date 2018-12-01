@@ -1,6 +1,3 @@
-#npm generate file
-package-lock.json
-
 # macOS System File
 .DS_Store
 
