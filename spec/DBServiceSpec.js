@@ -38,7 +38,6 @@ describe('DBServiceSpec', () => {
 
     afterEach(function(done) {
         db.db.transaction((tx) => {
-            console.log('afterEach')
             var sql = 'drop table testtable'
             tx.executeSql(sql, [], function (tx, results) {
             })
@@ -50,7 +49,6 @@ describe('DBServiceSpec', () => {
         db.new()
         db.db.transaction((tx) => {
             var sql = 'select * from ' + db.table_name
-            console.log('should create new note in the database')
             tx.executeSql(sql, [], function (tx, results) {
                 var len = results.rows.length, i
                 expect(len).toBe(1)

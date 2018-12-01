@@ -5,7 +5,6 @@ class dbservice {
     }
 
     init() {
-        console.log('init db')
         var table_name = this.table_name
         this.db.transaction(function (tx) {
             var sql = 'create table if not exists '+ table_name +
@@ -18,7 +17,6 @@ class dbservice {
             console.log(sql)
             tx.executeSql(sql)
         });
-        console.log(this.db)
 
         $('#new').bind('click', () => {
             this.new()
@@ -43,7 +41,6 @@ class dbservice {
                       '(id, title) values ("' + uuid + '", "untitled")'
             console.log(sql)
             tx.executeSql(sql, [], function(tx, result) {
-                console.log(result.insertId);
             }, function(tx, error) {
                 console.log(error);
             })
@@ -63,7 +60,6 @@ class dbservice {
         console.log('save');
         const editorDom = $('#editor')
         const content = editorDom.val()
-        console.log(this.db)
         var title = $('#title').val()
         this.db.transaction((tx) => {
             var sql = 'update '+ this.table_name +
@@ -126,11 +122,9 @@ class dbservice {
             const deleteBtnDom = $('#delete')
             const saveBtnDom = $('#save')
             const editor = require('./editor.js')
-            console.log(res)
             editorDom.val(res.content)
             titleDom.val(res.title)
             editor.reload()
-            // console.log(res.content);
             editorDom.prop('disabled', false)
             titleDom.prop('disabled', false)
             deleteBtnDom.prop('disabled', false)
@@ -142,7 +136,6 @@ class dbservice {
         var title = res.title
         var id = res.id
         var li = '<li class="note-entry" href="#" noteid="'+id+'">' + title + '</li>'
-        console.log(li)
         $('#note-item-list').append(li)
         $('li[noteid="'+ id +'"]').bind('click', () => {
             $('#selected_note').val(id)
