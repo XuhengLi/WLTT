@@ -24,11 +24,6 @@ module.exports = function(config) {
     exclude: [
     ],
 
-    coverageReporter: {
-        type : 'html',
-        dir : 'coverage/'
-    },
-
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
@@ -36,11 +31,28 @@ module.exports = function(config) {
         './spec/*.js': ['browserify']
     },
 
+    browserify: {
+      debug: true,
+      extensions: ['.js'],
+      configure: (bundle) => {
+        bundle.transform(require('browserify-istanbul')({
+          ignore: ['spec/*']
+        }));
+      }     
+    },
+
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress', 'coverage'],
-
+    coverageReporter: {
+      dir: 'coverage',
+      subdir: '.',
+      reporters: [
+        { type: 'html', dir: 'coverage' },
+        { type: 'text-summary' }
+      ]
+    },
 
     // web server port
     port: 9876,
