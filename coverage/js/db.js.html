@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/db.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> db.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>93/93</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88.89% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>24/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>92/92</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">class dbservice {
+    constructor(dbname='mydb', table_name='note') {
+        this.db = openDatabase(dbname, '1.0', 'my first database', 2 * 1024 * 1024)
+        this.table_name = table_name
+    }
+&nbsp;
+    init() {
+        var table_name = this.table_name
+        this.db.transaction(function (tx) {
+            var sql = 'create table if not exists '+ table_name +
+                      '(id varchar(36) not NULL,' +
+                      'title varchar(255) default NULL,' +
+                      'content text default NULL,' +
+                      'createtime datetime not NULL default(datetime()),' +
+                      'modifytime datetime not NULL default(datetime()),' +
+                      'primary key (id))'
+            console.log(sql)
+            tx.executeSql(sql)
+        });
+&nbsp;
+        $('#new').bind('click', () =&gt; {
+            this.new()
+        });
+&nbsp;
+        $('#save').bind('click', () =&gt; {
+            this.save()
+        });
+&nbsp;
+        $('#delete').bind('click', () =&gt; {
+            this.delete_notes(window.cur_noteid)
+        });
+    }
+&nbsp;
+    new() {
+        var table_name = this.table_name
+        const uuidv1 = require('uuid/v1');
+        var uuid = uuidv1()
+        window.cur_noteid = uuid
+        this.db.transaction(function (tx) {
+            var sql = 'insert into '+ table_name +
+                      '(id, title) values ("' + uuid + '", "untitled")'
+            console.log(sql)
+            tx.executeSql(sql, [], function(tx, result) {
+            }, function(tx, error) <span class="fstat-no" title="function not covered" >{</span>
+            })
+        })
+        $('#editor').prop('disabled', false)
+        $('#title').prop('disabled', false)
+        $('#delete').prop('disabled', false)
+        $('#save').prop('disabled', false)
+        $('#editor').val('')
+        $('#title').val('untitled')
+        $('#preview').empty()
+        var condition = 'id="' + uuid + '"'
+        this.get_notes(condition, 'id,title', (res) =&gt; { this.update_note_list(res) })
+    }
+&nbsp;
+    save() {
+        console.log('save');
+        const editorDom = $('#editor')
+        const content = editorDom.val()
+        var title = $('#title').val()
+        this.db.transaction((tx) =&gt; {
+            var sql = 'update '+ this.table_name +
+                      ' set title = "' + title + '", content = "' + content + '"' +
+                      'where id="' + window.cur_noteid + '"'
+            console.log(sql);
+            tx.executeSql(sql, [], function(tx, result) {
+                console.log('update success');
+            }, function(tx, error) <span class="fstat-no" title="function not covered" >{</span>
+            })
+        });
+        var condition = 'id="' + window.cur_noteid + '"'
+        this.get_notes(condition, 'id,title', (res) =&gt; {
+            $('li[noteid="'+ res.id +'"]').text(res.title)
+        })
+    }
+&nbsp;
+    get_notes(condition, fields, fun) {
+        console.log('get_notes')
+        this.db.transaction((tx) =&gt; {
+            var sql = 'select '+ fields +' from ' + this.table_name
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (condition)
+                sql += ' where ' + condition
+            console.log(sql)
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                for (i = 0; i &lt; len; i++) {
+                    fun(results.rows.item(i))
+                }
+            })
+        })
+    }
+&nbsp;
+    delete_notes(noteid) {
+        this.db.transaction((tx) =&gt; {
+            var sql = 'delete from ' + this.table_name + ' where id = "' + noteid + '"'
+            console.log(sql)
+            tx.executeSql(sql, [], function (tx, results) {
+                console.log(results)
+                $('li[noteid="'+ window.cur_noteid +'"]').remove()
+                $('#editor').prop('disabled', true)
+                $('#editor').val('')
+                $('#title').prop('disabled', true)
+                $('#title').val('')
+                $('#preview').empty()
+                $('#delete').prop('disabled', true)
+                $('#save').prop('disabled', true)
+            }, function (tx, error) <span class="fstat-no" title="function not covered" >{</span>
+            })
+        })
+    }
+&nbsp;
+&nbsp;
+    set_content(res) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (res) {
+            const editorDom = $('#editor')
+            const titleDom = $('#title')
+            const deleteBtnDom = $('#delete')
+            const saveBtnDom = $('#save')
+            const editor = require('./editor.js')
+            editorDom.val(res.content)
+            titleDom.val(res.title)
+            editor.reload()
+            editorDom.prop('disabled', false)
+            titleDom.prop('disabled', false)
+            deleteBtnDom.prop('disabled', false)
+            saveBtnDom.prop('disabled', false)
+        }
+    }
+&nbsp;
+    update_note_list(res) {
+        var title = res.title
+        var id = res.id
+        var li = '&lt;li class="note-entry" href="#" noteid="'+id+'"&gt;' + title + '&lt;/li&gt;'
+        $('#note-item-list').append(li)
+        $('li[noteid="'+ id +'"]').bind('click', () =&gt; {
+            $('#selected_note').val(id)
+            this.save()
+            var condition = 'id="'+ id +'"'
+            var fields = 'content,title'
+            this.get_notes(condition, fields, (res) =&gt; {
+                console.log(res)
+                this.set_content(res)
+                window.cur_noteid = id
+            })
+        })
+    }
+}
+module.exports = dbservice</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Dec 03 2018 10:40:29 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

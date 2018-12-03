@@ -42,7 +42,6 @@ class dbservice {
             console.log(sql)
             tx.executeSql(sql, [], function(tx, result) {
             }, function(tx, error) {
-                console.log(error);
             })
         })
         $('#editor').prop('disabled', false)
@@ -69,7 +68,6 @@ class dbservice {
             tx.executeSql(sql, [], function(tx, result) {
                 console.log('update success');
             }, function(tx, error) {
-                console.log(error);
             })
         });
         var condition = 'id="' + window.cur_noteid + '"'
@@ -109,7 +107,6 @@ class dbservice {
                 $('#delete').prop('disabled', true)
                 $('#save').prop('disabled', true)
             }, function (tx, error) {
-                console.log(error)
             })
         })
     }

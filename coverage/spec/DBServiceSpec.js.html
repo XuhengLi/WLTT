@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for spec/DBServiceSpec.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">spec/</a> DBServiceSpec.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>121/121</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>22/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>121/121</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">describe('DBServiceSpec', () =&gt; {
+    var dbservice = require('../js/db.js')
+    global.$ = require('jquery');
+    beforeEach(function(done) {
+        db = new dbservice('testdb', 'testtable');
+        var body=document.getElementsByTagName("body")[0]
+        while(body.hasChildNodes())
+        {
+            body.removeChild(body.firstChild);
+        }
+&nbsp;
+        var editor_dom = document.createElement("textarea")
+        var title_dom = document.createElement("textarea")
+        var save_dom = document.createElement("button")
+        var delete_dom = document.createElement("button")
+        var new_dom = document.createElement("button")
+        var list_dom = document.createElement("ul")
+&nbsp;
+        editor_dom.id = 'editor'
+        title_dom.id = 'title'
+        save_dom.id = 'save'
+        delete_dom.id = 'delete'
+        new_dom.id = 'new'
+        list_dom.id = 'note-item-list'
+&nbsp;
+        editor_dom.disabled = true
+        title_dom.disabled = true
+        delete_dom.disabled = true
+        save_dom.disabled = true
+&nbsp;
+        var element=document.getElementsByTagName("body")[0]
+        element.appendChild(editor_dom)
+        element.appendChild(title_dom)
+        element.appendChild(list_dom)
+        element.appendChild(delete_dom)
+        element.appendChild(save_dom)
+        element.appendChild(new_dom)
+&nbsp;
+        db.init()
+        done()
+    })
+&nbsp;
+    afterEach(function(done) {
+        db.db.transaction((tx) =&gt; {
+            var sql = 'drop table testtable'
+            tx.executeSql(sql, [], function (tx, results) {
+            })
+            done()
+        })
+    })
+&nbsp;
+    it('should create new note in the database', (done) =&gt; {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        db.db.transaction((tx) =&gt; {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i
+                expect(len).toBe(1)
+                done()
+            })
+        })
+    })
+&nbsp;
+    it('when create new note, editor should be unlocked', (done) =&gt; {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        expect(document.getElementById('editor').disabled).toBe(false)
+        expect(document.getElementById('title').disabled).toBe(false)
+        expect(document.getElementById('delete').disabled).toBe(false)
+        expect(document.getElementById('save').disabled).toBe(false)
+        done()
+    })
+&nbsp;
+    it('when click save, should save the note to db', (done) =&gt;  {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        console.log(save_button)
+        save_button.click()
+        db.db.transaction((tx) =&gt; {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe(title)
+                expect(results.rows.item(0).content).toBe(content)
+                done()
+            })
+        })
+    })
+&nbsp;
+    it('when there is nothing in the editor, save should not work', (done) =&gt;  {
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) =&gt; {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(0)
+                done()
+            })
+        })
+    })
+&nbsp;
+    it('when there is nothing in the editor, \
+        the whole editor area should be disabled', (done) =&gt;  {
+        expect(document.getElementById('editor').disabled).toBe(true)
+        expect(document.getElementById('title').disabled).toBe(true)
+        expect(document.getElementById('delete').disabled).toBe(true)
+        expect(document.getElementById('save').disabled).toBe(true)
+        done()
+    })
+&nbsp;
+    it('should delete the note and update the list', (done) =&gt;  {
+        var new_button = document.getElementById('new')
+        new_button.click()
+&nbsp;
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        
+        var save_button = document.getElementById('save')
+        save_button.click()
+&nbsp;
+        var delete_button = document.getElementById('delete')
+        delete_button.click()
+&nbsp;
+        db.db.transaction((tx) =&gt; {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(0)
+                done()
+            })
+        })
+    })
+&nbsp;
+    it('click one note and it should be load', (done) =&gt;  {
+        var new_button = document.getElementById('new')
+        new_button.click()
+&nbsp;
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        
+        var save_button = document.getElementById('save')
+        save_button.click()
+&nbsp;
+        db.db.transaction((tx) =&gt; {
+            var note_button = document.getElementById('note-item-list').firstChild
+            console.log(note_button)
+            note_button.click()
+            done()
+        })
+    })
+&nbsp;
+&nbsp;
+    it('should parse the markdown data to html', () =&gt; {
+        expect(true).toBe(true)
+    })
+})</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Dec 03 2018 10:40:29 GMT-0500 (Eastern Standard Time)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
