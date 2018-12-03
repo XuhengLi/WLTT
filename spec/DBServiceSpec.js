@@ -3,7 +3,6 @@ describe('DBServiceSpec', () => {
     global.$ = require('jquery');
     beforeEach(function(done) {
         db = new dbservice('testdb', 'testtable');
-        db.init()
         var body=document.getElementsByTagName("body")[0]
         while(body.hasChildNodes())
         {
@@ -14,12 +13,14 @@ describe('DBServiceSpec', () => {
         var title_dom = document.createElement("textarea")
         var save_dom = document.createElement("button")
         var delete_dom = document.createElement("button")
+        var new_dom = document.createElement("button")
         var list_dom = document.createElement("ul")
 
         editor_dom.id = 'editor'
         title_dom.id = 'title'
         save_dom.id = 'save'
         delete_dom.id = 'delete'
+        new_dom.id = 'new'
         list_dom.id = 'note-item-list'
 
         editor_dom.disabled = true
@@ -33,6 +34,9 @@ describe('DBServiceSpec', () => {
         element.appendChild(list_dom)
         element.appendChild(delete_dom)
         element.appendChild(save_dom)
+        element.appendChild(new_dom)
+
+        db.init()
         done()
     })
 
@@ -46,7 +50,8 @@ describe('DBServiceSpec', () => {
     })
 
     it('should create new note in the database', (done) => {
-        db.new()
+        var new_button = document.getElementById('new')
+        new_button.click()
         db.db.transaction((tx) => {
             var sql = 'select * from ' + db.table_name
             tx.executeSql(sql, [], function (tx, results) {
@@ -58,7 +63,8 @@ describe('DBServiceSpec', () => {
     })
 
     it('when create new note, editor should be unlocked', (done) => {
-        db.new()
+        var new_button = document.getElementById('new')
+        new_button.click()
         expect(document.getElementById('editor').disabled).toBe(false)
         expect(document.getElementById('title').disabled).toBe(false)
         expect(document.getElementById('delete').disabled).toBe(false)
@@ -67,12 +73,15 @@ describe('DBServiceSpec', () => {
     })
 
     it('when click save, should save the note to db', (done) =>  {
-        db.new()
+        var new_button = document.getElementById('new')
+        new_button.click()
         var editor_dom = document.getElementById('editor')
         var title_dom = document.getElementById('title')
         var content = editor_dom.value = Math.random().toString(36).substr(2)
         var title = title_dom.value = Math.random().toString(36).substr(2)
-        db.save()
+        var save_button = document.getElementById('save')
+        console.log(save_button)
+        save_button.click()
         db.db.transaction((tx) => {
             var sql = 'select * from ' + db.table_name
             tx.executeSql(sql, [], function (tx, results) {
@@ -86,7 +95,8 @@ describe('DBServiceSpec', () => {
     })
 
     it('when there is nothing in the editor, save should not work', (done) =>  {
-        db.save()
+        var save_button = document.getElementById('save')
+        save_button.click()
         db.db.transaction((tx) => {
             var sql = 'select * from ' + db.table_name
             tx.executeSql(sql, [], function (tx, results) {
@@ -106,9 +116,51 @@ describe('DBServiceSpec', () => {
         done()
     })
 
-    it('should delete the note and update the list', () =>  {
-        expect(true).toBe(true)
+    it('should delete the note and update the list', (done) =>  {
+        var new_button = document.getElementById('new')
+        new_button.click()
+
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        
+        var save_button = document.getElementById('save')
+        save_button.click()
+
+        var delete_button = document.getElementById('delete')
+        delete_button.click()
+
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(0)
+                done()
+            })
+        })
     })
+
+    it('click one note and it should be load', (done) =>  {
+        var new_button = document.getElementById('new')
+        new_button.click()
+
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        
+        var save_button = document.getElementById('save')
+        save_button.click()
+
+        db.db.transaction((tx) => {
+            var note_button = document.getElementById('note-item-list').firstChild
+            console.log(note_button)
+            note_button.click()
+            done()
+        })
+    })
+
 
     it('should parse the markdown data to html', () => {
         expect(true).toBe(true)
