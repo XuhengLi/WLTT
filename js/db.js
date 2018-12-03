@@ -1,3 +1,8 @@
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+
 class dbservice {
     constructor(dbname='mydb', table_name='note') {
         this.db = openDatabase(dbname, '1.0', 'my first database', 2 * 1024 * 1024)
@@ -20,15 +25,15 @@ class dbservice {
 
         $('#new').bind('click', () => {
             this.new()
-        });
+        })
 
         $('#save').bind('click', () => {
             this.save()
-        });
+        })
 
         $('#delete').bind('click', () => {
             this.delete_notes(window.cur_noteid)
-        });
+        })
     }
 
     new() {
@@ -62,8 +67,9 @@ class dbservice {
         var title = $('#title').val()
         this.db.transaction((tx) => {
             var sql = 'update '+ this.table_name +
-                      ' set title = "' + title + '", content = "' + content + '"' +
-                      'where id="' + window.cur_noteid + '"'
+                      ' set title = \'' + title.replaceAll("'", "''") + '\', content = \''
+                      + content.replaceAll("'", "''") + '\'' + ' where id="'
+                      + window.cur_noteid + '"'
             console.log(sql);
             tx.executeSql(sql, [], function(tx, result) {
                 console.log('update success');
