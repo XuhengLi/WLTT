@@ -12,6 +12,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+  <!-- <link href="../froala_editor_2.9.1/css/themes/dark.min.css" rel="stylesheet" type="text/css" /> -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
 </head>
 
 <body>
@@ -41,12 +50,15 @@
 
           <div class="form-group">
             <label for="noteTitle">Note Title</label>
-            <input type="text" class="form-control border" id="title" placeholder="Enter your note title">
+            <input type="text" class="form-control border" id="title" style="background-color: lightgrey" placeholder="Enter your note title">
           </div>
 
-          <div class="form-group" style="height: 90%;">
+          <div class="form-group">
             <label for="noteContent">Note Content</label><br>
-            <textarea type="text" id='editor' style="height: 100%;" class="scrollabletextbox md-textarea form-control" name="note">
+            <textarea type="text" id='editor_new' class="scrollabletextbox md-textarea form-control" name="note">
+            </textarea>
+            <textarea id="editor" style="height: 0%; display: none;"></textarea>
+            <!-- <textarea type="text" id='editor' style="height: 100%;" class="scrollabletextbox md-textarea form-control" name="note"> -->
             </textarea>
           </div>
 
@@ -91,6 +103,19 @@
         l.scrollTop = r.scrollTop
     })
   </script>
+
+  <script> 
+    $(function() { 
+      $('#editor_new').froalaEditor({
+        heightMax: 600,
+        toolbarButtons: ['fontFamily', '|', 'fontSize', '|', 'paragraphFormat', '|', 'bold', 'italic', 'underline', 'undo', 'redo', 'codeView'],
+        fontFamilySelection: true,
+        fontSizeSelection: true,
+        paragraphFormatSelection: true,
+      }) 
+    }); 
+  </script>
+
 </body>
 
 <script src='../app.js'></script>

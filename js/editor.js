@@ -1,6 +1,8 @@
 const marked = require('marked')
 const $ = global.$
 const hljs = global.hljs
+const h2p = require('html2plaintext')
+
 module.exports = {
   reload() {
     marked.setOptions({
@@ -14,11 +16,12 @@ module.exports = {
     })
     const preview = $('#preview')
     const editorDom = $('#editor')
-    const text = editorDom.val()
-    // preview.html(marked(text))
-    // console.log("preview marked text")
-    // console.log(marked(text))
-    // console.log("finish previewing")
+
+    // update the old editor content
+    var html = $('#editor_new').froalaEditor("html.get");
+    editorDom.val(html);
+    const text = h2p(html);
+
     preview.html(marked(text))
 
   }

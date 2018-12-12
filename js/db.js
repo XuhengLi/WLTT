@@ -49,11 +49,19 @@ class dbservice {
             }, function(tx, error) {
             })
         })
+
+        // both not editable
+        $('#editor_new').froalaEditor('edit.on');
         $('#editor').prop('disabled', false)
+
         $('#title').prop('disabled', false)
         $('#delete').prop('disabled', false)
         $('#save').prop('disabled', false)
+
+        // both content = ""
         $('#editor').val('')
+        $('#editor_new').froalaEditor('html.set', "");
+
         $('#title').val('untitled')
         $('#preview').empty()
         var condition = 'id="' + uuid + '"'
@@ -63,7 +71,12 @@ class dbservice {
     save() {
         console.log('save');
         const editorDom = $('#editor')
-        const content = editorDom.val()
+        // const content = editorDom.val()
+
+        // update the editor content from new editor
+        const content = $('#editor_new').froalaEditor("html.get")
+        editorDom.val(content)
+
         var title = $('#title').val()
         this.db.transaction((tx) => {
             var sql = 'update '+ this.table_name +
@@ -105,8 +118,15 @@ class dbservice {
             tx.executeSql(sql, [], function (tx, results) {
                 console.log(results)
                 $('li[noteid="'+ window.cur_noteid +'"]').remove()
+
+                // editor not editable
                 $('#editor').prop('disabled', true)
+                $('#editor_new').froalaEditor('edit.off');
+
+                // editor content. = ""
+                $('#editor_new').froalaEditor('html.set', "");
                 $('#editor').val('')
+
                 $('#title').prop('disabled', true)
                 $('#title').val('')
                 $('#preview').empty()
@@ -125,10 +145,18 @@ class dbservice {
             const deleteBtnDom = $('#delete')
             const saveBtnDom = $('#save')
             const editor = require('./editor.js')
+
+            // set content
             editorDom.val(res.content)
+            $('#editor_new').froalaEditor('html.set', res.content);
+
             titleDom.val(res.title)
             editor.reload()
+
+            // both editable
             editorDom.prop('disabled', false)
+            $('#editor_new').froalaEditor('edit.on');
+            
             titleDom.prop('disabled', false)
             deleteBtnDom.prop('disabled', false)
             saveBtnDom.prop('disabled', false)
@@ -142,6 +170,7 @@ class dbservice {
         $('#note-item-list').append(li)
         $('li[noteid="'+ id +'"]').bind('click', () => {
             $('#selected_note').val(id)
+            $('#editor_new').froalaEditor('edit.on');
             this.save()
             var condition = 'id="'+ id +'"'
             var fields = 'content,title'

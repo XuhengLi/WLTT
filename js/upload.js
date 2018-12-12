@@ -6,6 +6,7 @@ var fs = require("fs")
 var mkdirp = require('mkdirp')
 const readline = require('readline');
 const {google} = require('googleapis');
+const h2p = require('html2plaintext')
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
@@ -107,8 +108,10 @@ module.exports = {
               smartypants: false,
             })
             // const preview = $('#preview')
-            const editorDom = $('#editor')
-            const text = editorDom.val()
+            // const editorDom = $('#editor')
+            // const text = editorDom.val()
+            var html = $('#editor_new').froalaEditor("html.get");
+            const text = h2p(html);
             // preview.html(marked(text))
             // console.log(text)
             mkdirp('tmp', function(err) { 
