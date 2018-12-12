@@ -82,6 +82,14 @@
     global.gui = require('nw.gui')
     global.window = window
     global.$ = $
+    var r = document.querySelector('#preview_div')
+    var l = document.querySelector('#editor')
+    l.addEventListener('scroll',function(){
+        r.scrollTop = l.scrollTop
+    })
+    r.addEventListener('scroll',function(){
+        l.scrollTop = r.scrollTop
+    })
   </script>
 </body>
 
