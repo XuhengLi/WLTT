@@ -76,7 +76,7 @@
         <input type="text" class="form-control border" id="title" style="background-color: lightgrey" placeholder="Enter your note title">
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="editor-form">
         <label for="noteContent">Note Content</label><br>
         <textarea type="text" id='editor_new' class="scrollabletextbox md-textarea form-control" name="note">
         </textarea>
@@ -121,14 +121,6 @@
     global.gui = require('nw.gui')
     global.window = window
     global.$ = $
-    var r = document.querySelector('#preview_div')
-    var l = document.querySelector('#editor')
-    l.addEventListener('scroll',function(){
-        r.scrollTop = l.scrollTop
-    })
-    r.addEventListener('scroll',function(){
-        l.scrollTop = r.scrollTop
-    })
   </script>
 
   <script>
@@ -139,6 +131,15 @@
         fontFamilySelection: true,
         fontSizeSelection: true,
         paragraphFormatSelection: true,
+      })
+
+      var r = document.querySelector('#preview_div')
+      var l = document.querySelector('#editor-form div.fr-wrapper')
+      l.addEventListener('scroll',function(){
+          r.scrollTop = l.scrollTop
+      })
+      r.addEventListener('scroll',function(){
+          l.scrollTop = r.scrollTop
       })
     });
   </script>
