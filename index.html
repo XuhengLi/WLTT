@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="assets/css/plugins.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="assets/fonts/iconsmind/iconsmind.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -21,10 +21,57 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.ui.all.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.layout.js"></script>
+
+  <script type="text/javascript" src="js/complex.js"></script>
+
+  <script type="text/javascript">
+
+  var myLayout; // a var is required because this page utilizes: myLayout.allowOverflow() method
+
+  $(document).ready(function () {
+      myLayout = $('body').layout({
+          // enable showOverflow on west-pane so popups will overlap north pane
+          west__showOverflowOnHover: true
+
+      //, west__fxSettings_open: { easing: "easeOutBounce", duration: 750 }
+      });
+  });
+
+  </script>
+
+
+  <style type="text/css">
+  /**
+   *  Basic Layout Theme
+   *
+   *  This theme uses the default layout class-names for all classes
+   *  Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
+   */
+
+  .ui-layout-pane { /* all 'panes' */
+      background: #FFF;
+      border: 1px solid #BBB;
+      padding: 10px;
+      overflow: auto;
+  }
+
+  .ui-layout-resizer { /* all 'resizer-bars' */
+      background: #DDD;
+  }
+
+  .ui-layout-toggler { /* all 'toggler-buttons' */
+      background: #AAA;
+  }
+
+
+  </style>
 </head>
 
 <body>
-  <div id="header_div">
+  <div id="header_div" class="ui-layout-north" onmouseover="myLayout.allowOverflow('north')" onmouseout="myLayout.resetOverflow(this)">
     <div class="d-flex justify-content-center">
       <div style="text-align: center; background-color: white; width: 60%;opacity: 0.8;">
         <h2>We are WLTT -- World Leading Tech Team</h2><br>
@@ -32,9 +79,29 @@
       </div>
     </div>
   </div>
-  <div style="display: flex;height: 80%;">
-    <div class="col-md-2" style="background-color: #EAE6DA; border-right: dashed black;">
+  <div class="ui-layout-center">
+    <form>
+      <div class="form-group">
+        <label for="noteTitle">Note Title</label>
+        <input type="text" class="form-control border" id="title" style="background-color: lightgrey" placeholder="Enter your note title">
+      </div>
+
+      <div class="form-group">
+        <label for="noteContent">Note Content</label><br>
+        <textarea type="text" id='editor_new' class="scrollabletextbox md-textarea form-control" name="note">
+        </textarea>
+        <textarea id="editor" style="height: 0%; display: none;"></textarea>
+        <!-- <textarea type="text" id='editor' style="height: 100%;" class="scrollabletextbox md-textarea form-control" name="note"> -->
+        </textarea>
+      </div>
+
       <br>
+      <button type="button" id='save' class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+      <button type="button" id='delete' class="btn btn-warning"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+    </form>
+  </div>
+    <div class="ui-layout-west" style="background-color: #EAE6DA;">
+
       <button class="btn btn-primary" id="new"><i class="fa fa-plus" aria-hidden="true"></i><b> Create</b></button>
       <button class="btn btn-info" id="upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i><b> Upload</b></button><br/>
       <h4><b>All Available Notes: </b></h4>
@@ -42,44 +109,12 @@
       </ul>
     </div>
 
-    <div class="col-md-10" style="display: flex;height: 100%;">
-
-      <div class="col-md-6" style="height: 90%;overflow: scroll;">
-        <br>
-        <form style="height: 90%;">
-
-          <div class="form-group">
-            <label for="noteTitle">Note Title</label>
-            <input type="text" class="form-control border" id="title" style="background-color: lightgrey" placeholder="Enter your note title">
-          </div>
-
-          <div class="form-group">
-            <label for="noteContent">Note Content</label><br>
-            <textarea type="text" id='editor_new' class="scrollabletextbox md-textarea form-control" name="note">
-            </textarea>
-            <textarea id="editor" style="height: 0%; display: none;"></textarea>
-            <!-- <textarea type="text" id='editor' style="height: 100%;" class="scrollabletextbox md-textarea form-control" name="note"> -->
-            </textarea>
-          </div>
-
-          <br>
-          <button type="button" id='save' class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
-          <button type="button" id='delete' class="btn btn-warning"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
-        </form>
-      </div>
-
-      <div class="col-md-6" style="background-color: #F0EDE5" id='preview_div'>
-        
+      <div class="ui-layout-east" style="background-color: #F0EDE5" id='preview_div'>
+          <div id='noteid' style='display:none'></div>
+          <input type="hidden" value="-1" id="selected_note" />
         <div id='preview'></div>
       </div>
-
-    </div>
-
-    <div id='noteid' style='display:none'></div>
-    <input type="hidden" value="-1" id="selected_note" />
-  </div>
-
-  <footer style="background-color: #efefef">
+  <div class="ui-layout-south" style="background-color: #efefef">
     <div class="text-center center-block">
       <br>
       <span style="font-size: 17px;"><b style="font-style: italic;">We Are Junyue Wu(W), Xuheng Li(L), Shulan Tang(T), Bowen Tan(T).<b> Find Us On:</span><br>
@@ -89,7 +124,9 @@
       <a href="#"><i class="fa fa-envelope-square fa-3x social"></i></a>
       <br/><br/>
     </div>
-  </footer>
+</div>
+
+
   <script>
     global.gui = require('nw.gui')
     global.window = window
@@ -104,16 +141,16 @@
     })
   </script>
 
-  <script> 
-    $(function() { 
+  <script>
+    $(function() {
       $('#editor_new').froalaEditor({
         heightMax: 600,
         toolbarButtons: ['fontFamily', '|', 'fontSize', '|', 'paragraphFormat', '|', 'bold', 'italic', 'underline', 'undo', 'redo', 'codeView'],
         fontFamilySelection: true,
         fontSizeSelection: true,
         paragraphFormatSelection: true,
-      }) 
-    }); 
+      })
+    });
   </script>
 
 </body>
