@@ -1,7 +1,7 @@
-String.prototype.replaceAll = function(search, replacement) {
-    var target = this;
-    return target.replace(new RegExp(search, 'g'), replacement);
-};
+// String.prototype.replaceAll = function(search, replacement) {
+//     var target = this;
+//     return target.replace(new RegExp(search, 'g'), replacement);
+// };
 
 class dbservice {
     constructor(dbname='mydb', table_name='note') {
@@ -19,7 +19,6 @@ class dbservice {
                       'createtime datetime not NULL default(datetime()),' +
                       'modifytime datetime not NULL default(datetime()),' +
                       'primary key (id))'
-            console.log(sql)
             tx.executeSql(sql)
         });
 
@@ -36,7 +35,13 @@ class dbservice {
         })
     }
 
+    replaceAll(str, search, replacement) {
+        console.log(typeof(str))
+        return str.replace(new RegExp(search, 'g'), replacement);
+    }
+
     new() {
+        console.log('new')
         var table_name = this.table_name
         const uuidv1 = require('uuid/v1');
         var uuid = uuidv1()
@@ -44,7 +49,6 @@ class dbservice {
         this.db.transaction(function (tx) {
             var sql = 'insert into '+ table_name +
                       '(id, title) values ("' + uuid + '", "untitled")'
-            console.log(sql)
             tx.executeSql(sql, [], function(tx, result) {
             }, function(tx, error) {
             })
@@ -79,15 +83,21 @@ class dbservice {
 
         var title = $('#title').val()
         this.db.transaction((tx) => {
+            // String.prototype.replaceAll = function(search, replacement) {
+            //     var target = this;
+            //     return target.replace(new RegExp(search, 'g'), replacement);
+            // };
+            //console.log(title)
+            console.log(typeof(title))
+            console.log(typeof(content))
             var sql = 'update '+ this.table_name +
-                      ' set title = \'' + title.replaceAll("'", "''") + '\', content = \''
-                      + content.replaceAll("'", "''") + '\'' + ' where id="'
+                      ' set title = \'' + this.replaceAll(title, "'", "''") + '\', content = \''
+                      + this.replaceAll(content, "'", "''") + '\'' + ' where id="'
                       + window.cur_noteid + '"'
             console.log(sql);
             tx.executeSql(sql, [], function(tx, result) {
                 console.log('update success');
-            }, function(tx, error) {
-            })
+            }, function(tx, error) {})
         });
         var condition = 'id="' + window.cur_noteid + '"'
         this.get_notes(condition, 'id,title', (res) => {
@@ -101,7 +111,6 @@ class dbservice {
             var sql = 'select '+ fields +' from ' + this.table_name
             if (condition)
                 sql += ' where ' + condition
-            console.log(sql)
             tx.executeSql(sql, [], function (tx, results) {
                 var len = results.rows.length, i;
                 for (i = 0; i < len; i++) {
@@ -114,9 +123,7 @@ class dbservice {
     delete_notes(noteid) {
         this.db.transaction((tx) => {
             var sql = 'delete from ' + this.table_name + ' where id = "' + noteid + '"'
-            console.log(sql)
             tx.executeSql(sql, [], function (tx, results) {
-                console.log(results)
                 $('li[noteid="'+ window.cur_noteid +'"]').remove()
 
                 // editor not editable
@@ -175,7 +182,6 @@ class dbservice {
             var condition = 'id="'+ id +'"'
             var fields = 'content,title'
             this.get_notes(condition, fields, (res) => {
-                console.log(res)
                 this.set_content(res)
                 window.cur_noteid = id
             })
