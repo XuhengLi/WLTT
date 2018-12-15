@@ -1,6 +1,6 @@
 # mdNote
 [![Build Status](https://travis-ci.com/XuhengLi/WLTT.svg?branch=master)](https://travis-ci.com/XuhengLi/WLTT)
-Marddown note taking application created by WLTT for COMS4156 - Advanced Software Engineering.
+Markdown note taking application created by WLTT for COMS4156 - Advanced Software Engineering.
 # Setting up and Running
 
 We are going to need to install npm as a dependency manager for our application.
