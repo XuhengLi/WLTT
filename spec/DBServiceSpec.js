@@ -3,7 +3,7 @@ describe('DBServiceSpec', () => {
     global.$ = require('jquery');
 
     require('../node_modules/froala-editor/js/froala_editor.min.js')($);
-
+    const h2p = require('html2plaintext')
     beforeEach(function(done) {
         db = new dbservice('testdb', 'testtable');
         var body=document.getElementsByTagName("body")[0]
@@ -11,19 +11,6 @@ describe('DBServiceSpec', () => {
         {
             body.removeChild(body.firstChild);
         }
-        // var link_dom = document.createElement("script")
-        // var link_dom2 = document.createElement("script")
-        // var link_dom3 = document.createElement("script")
-        // var head=document.getElementsByTagName("head")[0]
-        // link_dom.type = 'text/javascript'
-        // link_dom2.type = 'text/javascript'
-        // link_dom3.type = 'text/javascript'
-        // link_dom.src = 'https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js'
-        // head.appendChild(link_dom)
-        // link_dom2.src = 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js'
-        // head.appendChild(link_dom2)
-        // link_dom3.src = 'https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js'
-        // head.appendChild(link_dom3)
 
         var editor_dom = document.createElement("textarea")
         var new_editor_dom = document.createElement("textarea")
@@ -77,141 +64,145 @@ describe('DBServiceSpec', () => {
         })
     })
 
-    // it('should create new note in the database', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i
-    //             expect(len).toBe(1)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('should create new note in the database', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i
+                expect(len).toBe(1)
+                done()
+            })
+        })
+    })
 
-    // it('when create new note, editor should be unlocked', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     expect(document.getElementById('editor').disabled).toBe(false)
-    //     expect(document.getElementById('title').disabled).toBe(false)
-    //     expect(document.getElementById('delete').disabled).toBe(false)
-    //     expect(document.getElementById('save').disabled).toBe(false)
-    //     done()
-    // })
+    it('when create new note, editor should be unlocked', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        expect(document.getElementById('editor').disabled).toBe(false)
+        expect(document.getElementById('title').disabled).toBe(false)
+        expect(document.getElementById('delete').disabled).toBe(false)
+        expect(document.getElementById('save').disabled).toBe(false)
+        done()
+    })
 
-    // // Test 1
-    // // Equivalent Partition 1
-    // // Test Case Set 1.1.1
-    // it('when click save, should save the note to db \
-    //    (The note content editor is empty)', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe('')
-    //             done()
-    //         })
-    //     })
-    // })
+    // Test 1
+    // Equivalent Partition 1
+    // Test Case Set 1.1.1
+    it('when click save, should save the note to db \
+       (The note content editor is empty)', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe(title)
+                expect(h2p(results.rows.item(0).content)).toBe('')
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    (The note content editor has 1 lower character(i.e character ’a’))',
-    //    (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a'
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe('untitled')
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       (The note content editor has 1 lower character(i.e character ’a’))',
+       (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a'
+        $('#editor_new').froalaEditor('html.set', content);
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe('untitled')
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    (The note content editor has 1 upper character(i.e character ’A’))',
-    //    (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'A'
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe('untitled')
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       (The note content editor has 1 upper character(i.e character ’A’))',
+       (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'A'
+        $('#editor_new').froalaEditor('html.set', content);
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe('untitled')
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The note content editor has 1 symbol(i.e comma)',
-    //    (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = ','
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe('untitled')
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The note content editor has 1 symbol(i.e comma)',
+       (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = ','
+        $('#editor_new').froalaEditor('html.set', content);
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe('untitled')
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    (The note content editor has 9,999 characters)',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     editor_dom.maxLength = 35
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(34).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       (The note content editor has 9,999 characters)',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        editor_dom.maxLength = 35
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(34).substr(2)
+        $('#editor_new').froalaEditor('html.set', content);
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                done()
+            })
+        })
+    })
 
     it('when click save, should save the note to db \
        (The note content editor has 10,000 characters)',
@@ -224,7 +215,6 @@ describe('DBServiceSpec', () => {
         var title_dom = document.getElementById('title')
         var content = editor_dom.value = Math.random().toString(35).substr(2)
         $('#editor_new').froalaEditor('html.set', content);
-        content = '<p>' + content + '</p>'
         var save_button = document.getElementById('save')
         save_button.click()
         db.db.transaction((tx) => {
@@ -232,769 +222,803 @@ describe('DBServiceSpec', () => {
             tx.executeSql(sql, [], function (tx, results) {
                 var len = results.rows.length, i;
                 expect(len).toBe(1)
-                expect(results.rows.item(0).content).toBe(content)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
                 done()
             })
         })
     })
 
-    // it('when click save, should save the note to db \
-    //    (The note content editor has 10,001 characters)',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     editor_dom.maxLength = 35
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).content).toBe(content.substring(0, 35))
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       (The note content editor has 10,001 characters)',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        editor_dom.maxLength = 35
+        $('#editor_new').froalaEditor({charCounterMax: 35})
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        $('#editor_new').froalaEditor('html.set', content);
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content.substring(0, 35))
+                done()
+            })
+        })
+    })
 
-    // // Test Case Set 1.1.2
-    // it('when click save, should save the note to db \
-    //    (The title editor is empty)', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    // Test Case Set 1.1.2
+    it('when click save, should save the note to db \
+       (The title editor is empty)', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        $('#editor_new').froalaEditor('html.set', content)
+        var title_dom = document.getElementById('title')
+        var title = title_dom.value = ''
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe('')
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    (The title editor has 1 lower character(i.e character ’a’))', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var title = title_dom.value = 'a'
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       (The title editor has 1 lower character(i.e character ’a’))', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = 'a'
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    (The title editor has 1 upper character(i.e character ’A’))', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var title = title_dom.value = 'A'
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       (The title editor has 1 upper character(i.e character ’A’))', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = 'A'
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The title editor has 1 symbol(i.e comma)', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var title = title_dom.value = ','
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The title editor has 1 symbol(i.e comma)', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = ','
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The note content editor has 99 characters',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     title_dom.maxLength = 35
-    //     var content = editor_dom.value = 'A'
-    //     var title = title_dom.value = Math.random().toString(34).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The title editor has 99 characters',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        title_dom.maxLength = 35
+        var content = editor_dom.value = 'A'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(34).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The note content editor has 100 characters',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     title_dom.maxLength = 35
-    //     var content = editor_dom.value = 'A'
-    //     var title = title_dom.value = Math.random().toString(35).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The title editor has 100 characters',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        title_dom.maxLength = 35
+        var content = editor_dom.value = 'A'
+        var title = title_dom.value = Math.random().toString(35).substr(2)
+        $('#editor_new').froalaEditor('html.set', content)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The note content editor has 101 characters',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     title_dom.maxLength = 35
-    //     var content = editor_dom.value = 'A'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content.substring(0, 35))
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The title editor has 101 characters',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        title_dom.maxLength = 35
+        var content = editor_dom.value = 'A'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe(title.substring(0, 35))
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                done()
+            })
+        })
+    })
 
-    // // Test Case Set 1.1.3
-    // // We found this set of tests is meaningless, so we delete these tests.
+    // Test Case Set 1.1.3
+    // We found this set of tests is meaningless, so we delete these tests.
 
-    // // Equivalence Partition 2
-    // // Test Set 1.2.1
-    // it('when click save, should save the note to db \
-    //    The quote sign is at the beginning of the test \
-    //    All of the quote quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = '"A"'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    // Equivalence Partition 2
+    // Test Set 1.2.1
+    it('when click save, should save the note to db \
+       The quote sign is at the beginning of the test \
+       All of the quote quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = '"A"'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The single quote  sign is at the beginning of the test \
-    //    All of the single quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = '\'A\''
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The single quote  sign is at the beginning of the test \
+       All of the single quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = '\'A\''
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The back quote  sign is at the beginning of the test \
-    //    All of the bacck quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = '`A`'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The back quote  sign is at the beginning of the test \
+       All of the bacck quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = '`A`'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The quote sign is at the beginning of the test \
-    //    All of the quote quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = '"A'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The quote sign is at the beginning of the test \
+       All of the quote quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = '"A'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The single quote  sign is at the beginning of the test \
-    //    All of the single quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = '\'A\''
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The single quote  sign is at the beginning of the test \
+       All of the single quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = '\'A\''
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The back quote  sign is at the beginning of the test \
-    //    All of the bacck quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = '`A`'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The back quote  sign is at the beginning of the test \
+       All of the bacck quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = '`A`'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The quote sign is at the middle of the test \
-    //    All of the quote quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a"A"b'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The quote sign is at the middle of the test \
+       All of the quote quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a"A"b'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The single quote  sign is at the middle of the test \
-    //    All of the single quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a\'A\'b'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The single quote  sign is at the middle of the test \
+       All of the single quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a\'A\'b'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The back quote  sign is at the middle of the test \
-    //    All of the bacck quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a`A`b'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The back quote  sign is at the middle of the test \
+       All of the bacck quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a`A`b'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The quote sign is at the middle of the test \
-    //    All of the quote quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a"A'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The quote sign is at the middle of the test \
+       All of the quote quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a"A'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(results.rows.item(0).title).toBe(title)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The single quote  sign is at the beginning of the test \
-    //    All of the single quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a\'A'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The single quote  sign is at the beginning of the test \
+       All of the single quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a\'A'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The back quote  sign is at the beginning of the test \
-    //    All of the bacck quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a`A'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The back quote  sign is at the beginning of the test \
+       All of the bacck quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a`A'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
 
-    // it('when click save, should save the note to db \
-    //    The quote sign is at the end of the test \
-    //    All of the quote quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a"A"'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The quote sign is at the end of the test \
+       All of the quote quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a"A"'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The single quote  sign is at the end of the test \
-    //    All of the single quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a\'A\''
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The single quote  sign is at the end of the test \
+       All of the single quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a\'A\''
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The back quote  sign is at the end of the test \
-    //    All of the bacck quote signs are in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'a`A`'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The back quote  sign is at the end of the test \
+       All of the bacck quote signs are in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'a`A`'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The quote sign is at the end of the test \
-    //    All of the quote quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'A"'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The quote sign is at the end of the test \
+       All of the quote quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'A"'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The single quote  sign is at the end of the test \
-    //    All of the single quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'A\''
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The single quote  sign is at the end of the test \
+       All of the single quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'A\''
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    The back quote  sign is at the end of the test \
-    //    All of the bacck quote signs are not in pairs.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'A`'
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       The back quote  sign is at the end of the test \
+       All of the bacck quote signs are not in pairs.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'A`'
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // it('when click save, should save the note to db \
-    //    There is a complete and valid SQL statement in the note content.',
-    //    (done) => {
-    //     // For test purpose, we temporarliy set editor's max length to be 35
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = 'Select * from ' + db.table_name + 
-    //                                      ';' + 'Select * from ' + db.table_name
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(1)
-    //             expect(results.rows.item(0).title).toBe(title)
-    //             expect(results.rows.item(0).content).toBe(content)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when click save, should save the note to db \
+       There is a complete and valid SQL statement in the note content.',
+       (done) => {
+        // For test purpose, we temporarliy set editor's max length to be 35
+        var new_button = document.getElementById('new')
+        new_button.click()
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = 'Select * from ' + db.table_name + 
+                                         ';' + 'Select * from ' + db.table_name
+        $('#editor_new').froalaEditor('html.set', content)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(1)
+                expect(h2p(results.rows.item(0).content)).toBe(content)
+                expect(results.rows.item(0).title).toBe(title)
+                done()
+            })
+        })
+    })
 
-    // // Equivalence Partition 3
-    // // Test Set 1.3.1
-    // // Some of the test cases in the document have already been coverd by some
-    // // of the previous test and some miscellaneous test caes
-    // it('should delete the note and update the list', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
+    // Equivalence Partition 3
+    // Test Set 1.3.1
+    // Some of the test cases in the document have already been coverd by some
+    // of the previous test and some miscellaneous test caes
+    it('should delete the note and update the list', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
 
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
         
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
+        var save_button = document.getElementById('save')
+        save_button.click()
 
-    //     var delete_button = document.getElementById('delete')
-    //     delete_button.click()
+        var delete_button = document.getElementById('delete')
+        delete_button.click()
 
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(0)
-    //             done()
-    //         })
-    //     })
-    // })
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(0)
+                done()
+            })
+        })
+    })
 
-    // // Test Set 1.3.2
-    // it('should delete the note and update the list \
-    //    (When the title is empty, delete the note.)', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
+    // Test Set 1.3.2
+    it('should delete the note and update the list \
+       (When the title is empty, delete the note.)', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
 
-    //     var editor_dom = document.getElementById('editor')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var editor_dom = document.getElementById('editor')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
         
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
+        var save_button = document.getElementById('save')
+        save_button.click()
 
-    //     var delete_button = document.getElementById('delete')
-    //     delete_button.click()
+        var delete_button = document.getElementById('delete')
+        delete_button.click()
 
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(0)
-    //             done()
-    //         })
-    //     })
-    // })
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(0)
+                done()
+            })
+        })
+    })
 
-    // it('when there is nothing in the editor, save should not work', (done) => {
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
-    //     db.db.transaction((tx) => {
-    //         var sql = 'select * from ' + db.table_name
-    //         tx.executeSql(sql, [], function (tx, results) {
-    //             var len = results.rows.length, i;
-    //             expect(len).toBe(0)
-    //             done()
-    //         })
-    //     })
-    // })
+    it('when there is nothing in the editor, save should not work', (done) => {
+        var save_button = document.getElementById('save')
+        save_button.click()
+        db.db.transaction((tx) => {
+            var sql = 'select * from ' + db.table_name
+            tx.executeSql(sql, [], function (tx, results) {
+                var len = results.rows.length, i;
+                expect(len).toBe(0)
+                done()
+            })
+        })
+    })
 
-    // it('when there is nothing in the editor, \
-    //     the whole editor area should be disabled', (done) => {
-    //     expect(document.getElementById('editor').disabled).toBe(true)
-    //     expect(document.getElementById('title').disabled).toBe(true)
-    //     expect(document.getElementById('delete').disabled).toBe(true)
-    //     expect(document.getElementById('save').disabled).toBe(true)
-    //     done()
-    // })
+    it('when there is nothing in the editor, \
+        the whole editor area should be disabled', (done) => {
+        expect(document.getElementById('editor').disabled).toBe(true)
+        expect(document.getElementById('title').disabled).toBe(true)
+        expect(document.getElementById('delete').disabled).toBe(true)
+        expect(document.getElementById('save').disabled).toBe(true)
+        done()
+    })
 
-    // it('click one note and it should be load', (done) => {
-    //     var new_button = document.getElementById('new')
-    //     new_button.click()
+    it('click one note and it should be load', (done) => {
+        var new_button = document.getElementById('new')
+        new_button.click()
 
-    //     var editor_dom = document.getElementById('editor')
-    //     var title_dom = document.getElementById('title')
-    //     var content = editor_dom.value = Math.random().toString(36).substr(2)
-    //     var title = title_dom.value = Math.random().toString(36).substr(2)
+        var editor_dom = document.getElementById('editor')
+        var title_dom = document.getElementById('title')
+        var content = editor_dom.value = Math.random().toString(36).substr(2)
+        var title = title_dom.value = Math.random().toString(36).substr(2)
         
-    //     var save_button = document.getElementById('save')
-    //     save_button.click()
+        var save_button = document.getElementById('save')
+        save_button.click()
 
-    //     db.db.transaction((tx) => {
-    //         var note_button = document.getElementById('note-item-list').firstChild
-    //         console.log(note_button)
-    //         note_button.click()
-    //         done()
-    //     })
-    // })
+        db.db.transaction((tx) => {
+            var note_button = document.getElementById('note-item-list').firstChild
+            console.log(note_button)
+            note_button.click()
+            done()
+        })
+    })
 
 
     // it('should parse the markdown data to html', () => {
