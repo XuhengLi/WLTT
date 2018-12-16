@@ -114,6 +114,10 @@ module.exports = {
             const text = h2p(html);
             // preview.html(marked(text))
             // console.log(text)
+            fs.unlink('tmp/tmp.pdf', (err) => {
+              if (err) throw err;
+              console.log('tmp/tmp.pdf was deleted');
+            });
             mkdirp('tmp', function(err) { 
                 if(err) {
                     return console.log(err);
